@@ -27,19 +27,19 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'principal' %}">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="about.html">Sudamerica</a></li>
                             <li class="nav-item"><a class="nav-link" href="contact.html">Europa</a></li>
                             <li class="nav-item"><a class="nav-link" href="pricing.html">Asia</a></li>
                             <li class="nav-item"><a class="nav-link" href="faq.html">Contacto</a></li>
                             <li class="nav-item"><a class="nav-link" href="faq.html">Mapa del Blog</a></li>
                             {% if not request.user.is_authenticated %}
-                            <li class="nav-item btn-primary"><a class="nav-link" href="faq.html">INICIAR SESIÓN</a></li>
-                            <li class="nav-item btn-primary"><a class="nav-link" href="faq.html">REGISTRATE!</a></li>
+                            <li class="nav-item btn-primary"><a class="nav-link" href="{% url 'login_user' %}">INICIAR SESIÓN</a></li>
+                            <li class="nav-item btn-primary"><a class="nav-link" href="{% url 'registrate' %}">REGISTRATE!</a></li>
                             {% else %}
-                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#edit_user">HOLA! {{ user.username }}</a></li>
+                            <li class="nav-item btn-primary"><a class="nav-link" href="#edit_user">HOLA! {{ user.username }}</a></li>
                             <li class="nav-item"><a class="nav-link" href="faq.html">CERRAR SESIÓN</a></li>
-                            <li class="nav-item "><a class="nav-link" href="faq.html">CHAT</a></li>
+                            <li class="nav-item "><a class="nav-link" href="{% url 'logout' %}">CHAT</a></li>
                             {% endif %}
                             <!--<li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registrate</a>
@@ -78,7 +78,9 @@
                 </div>
             </header>
             <!-- Features section-->
-            
+            {% block content %}
+
+            {% endblock %}
             <!-- Testimonial section-->
             
             <!-- Blog preview section-->
