@@ -6,4 +6,4 @@ from appviajandoando.models import *
 # Create your views here.
 
 def principal(request):
-    return render(request, 'appviajandoando/principal.html')
+    return render(request, 'index.html')
