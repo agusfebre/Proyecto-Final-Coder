@@ -7,3 +7,12 @@ from appviajandoando.models import *
 
 def principal(request):
     return render(request, 'index.html')
+    
+def europa(request):
+    return render(request, 'appviajandoando/europa/europa.html')
+
+def america(request):
+    return render(request, 'appviajandoando/america/america.html')
+
+def asia(request):
+    return render(request, 'appviajandoando/asia/asia.html')
