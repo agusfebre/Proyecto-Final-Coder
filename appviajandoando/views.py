@@ -54,3 +54,6 @@ def registrate(request):
 
 def europa(request):
     return render(request , 'europa.html')
+
+def asia(request):
+    return render(request , 'asia.html')
