@@ -51,6 +51,21 @@ def registrate(request):
         form=UserRegisterForm()
     return render(request, 'registrate.html', {'form':form})
 
+def editarPerfil(request):
+    usuario=request.user
+    if request.method=="POST":
+        form= UserEditForm(request.POST)
+        if form.is_valid():
+            usuario.first_name=form.cleaned_data["first_name"]
+            usuario.last_name=form.cleaned_data["last_name"]
+            usuario.email=form.cleaned_data["email"]
+            usuario.password1=form.cleaned_data["password1"]
+            usuario.password2=form.cleaned_data["password2"]
+            usuario.save()
+            return render(request, 'inicio.html', {'mensaje':f"Perfil de {usuario} editado"})
+    else:
+        form= UserEditForm(instance=usuario)
+    return render(request, 'editarPerfil.html', {'form':form, 'usuario':usuario})
 
 def europa(request):
     return render(request , 'europa.html')

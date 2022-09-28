@@ -4,8 +4,6 @@
   
     <head>
 
-       
-
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -27,34 +25,28 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="{% url 'principal' %}">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'america' %}">America</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'europa' %}">Europa</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'asia' %}">Asia</a></li>
-                            <li class="nav-item"><a class="nav-link" href="faq.html">Contacto</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'principal' %}">INICIO</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'america' %}">AMÉRICA</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'europa' %}">EUROPA</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'asia' %}">ASIA</a></li>
+                            <li class="nav-item"><a class="nav-link" href="faq.html">CONTACTO</a></li>
                        
-                            {% if not request.user.is_authenticated %}
-                            <li class="nav-item btn-primary"><a class="nav-link" href="{% url 'login_user' %}">INICIAR SESIÓN</a></li>
-                            <li class="nav-item btn-primary"><a class="nav-link" href="{% url 'registrate' %}">REGISTRATE!</a></li>
-                            {% else %}
-                            <li class="nav-item btn-primary"><a class="nav-link" href="#edit_user">HOLA! {{ user.username }}</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'selectUser' %}">CHAT</a></li>
-                            <li class="nav-item "><a class="nav-link" href="{% url 'logout' %}">CERRAR SESIÓN</a></li>
-                            {% endif %}
-                            <!--<li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registrate</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="blog-home.html">Blog Home</a></li>
-                                    <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
+                            {% if  request.user.is_authenticated %}
+                        </li>
+                                                               
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toogle btn-primary" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">HOLA! {{ user.username }}</a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+                                    <li><a class="dropdown-item" href="{% url 'editarPerfil' %}">Editar Perfil</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'cargarexperiencia' %}">Nueva Experiencia</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'selectUser' %}">Chat</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mapa del Blog</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                                    <li><a class="dropdown-item" href="portfolio-overview.html">Portfolio Overview</a></li>
-                                    <li><a class="dropdown-item" href="portfolio-item.html">Portfolio Item</a></li>
-                                </ul>
-                            </li>--->
+                            {% endif %}
+                           
+                        >
+
                         </ul>
                     </div>
                 </div>
@@ -66,15 +58,17 @@
                     <div class="row gx-5 align-items-center justify-content-center">
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
-                                <h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5 template for modern businesses</h1>
-                                <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
+                                <h1 class="display-5 fw-bolder text-white mb-2">Bienvenido a ViajandoAndo!</h1>
+                                <p class="lead fw-normal text-white-50 mb-4">En nuestro blog encontraras las mejores y sinceras opiniones de viajeros como vos! Aquí cada uno nos cuenta su experiencia y recomendaciones, también podrás opinar y despejar consultas… </p>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
-                                    <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                                    {% if not request.user.is_authenticated %}
+                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'registrate' %}">Registrarse</a>
+                                    <a class="btn btn-outline-light btn-lg px-4" href="{% url 'login_user' %}">Iniciar Sesión</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="static\appviajandoando\assets\Logo-Viajando-Ando.jpeg" alt="..." /></div>
                     </div>
                 </div>
             </header>

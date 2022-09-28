@@ -18,10 +18,9 @@ urlpatterns = [
     path ('registrate/', registrate, name="registrate"),
     path('europa/', europa, name='europa'),
     path('asia/', asia, name='asia'),
-
     path('america/', america, name='america'),
-
     path('cargar_experiencia/', cargarexperiencia, name='cargarexperiencia'),
+    path('editarPerfil', editarPerfil, name="editarPerfil"),
 
 
 ]
