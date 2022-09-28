@@ -1,5 +1,9 @@
 from django.urls import path
+
 from appviajandoando.views import europa, principal, login_user, registrate, asia, america
+
+from appviajandoando.views import *
+
 
 #import para Statics Files
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -14,7 +18,11 @@ urlpatterns = [
     path ('registrate/', registrate, name="registrate"),
     path('europa/', europa, name='europa'),
     path('asia/', asia, name='asia'),
+
     path('america/', america, name='america'),
+
+    path('cargar_experiencia/', cargarexperiencia, name='cargarexperiencia'),
+
 
 ]
 

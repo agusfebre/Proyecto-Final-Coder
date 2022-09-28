@@ -58,5 +58,18 @@ def europa(request):
 def asia(request):
     return render(request , 'asia.html')
 
+
 def america(request):
     return render(request, 'america.html')
+
+def cargarexperiencia(request):
+    if request.method == 'POST':
+        form = ExperienciaForm(request.POST)
+        if form.is_valid():
+            post_item = form.save(commit=False)
+            post_item.save()
+            return redirect('/')
+    else:
+        form = ExperienciaForm()
+    return render(request, 'nueva_experiencia.html', {'form':form})
+

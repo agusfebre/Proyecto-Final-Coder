@@ -1,0 +1,37 @@
+{% extends 'ChatApp/home.html' %}
+
+{% load static %}
+
+{% block content-chat %}
+
+<section class="page-section" id="{% url 'salaChat' %}">
+    <div class="conteiner text-center">
+        <h1>SALA DE CHAT</h1>
+        <div id="wrapper">
+            <div id="menu">
+                <!--Usuario logeado (emisor)-->
+                <h3 class="masthead-heading text-white text-uppercase mb-0">Bienvenidx! {{ user.username }} </h3><b></b>
+                <div style="clear:both"></div>
+            </div>
+             
+            <!--Chats con usuario-->
+        </div>
+                <!---Receptor del mensaje-->
+                <h3 class="masthead-heading text-uppercase mb-0">Elija el usuario:</h3><b></b>
+                <form action="{% url 'salaChat' %}" method="POST"> {% csrf_token %}
+                    <lavel class="masthead-heading text-uppercase mb-0" for="receptor">Enviar a:</lavel>
+                    <input type="hidden" name="emisor" value="{{ user.username }}"/>
+                    <input type="hidden" name="jon" value="origen_select_user"/>
+                    <input type="hidden" name="text" value=""/>
+                    <select name="receptor" id="receptor">
+                        {% for user in users %}
+                        {% if user != request.user %}
+                        <option id="receptor">{{ user.username }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                  <button>Seleccionar</button>
+                </form>
+         </div>
+
+{% endblock %}

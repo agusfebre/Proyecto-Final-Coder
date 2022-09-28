@@ -32,14 +32,14 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'europa' %}">Europa</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'asia' %}">Asia</a></li>
                             <li class="nav-item"><a class="nav-link" href="faq.html">Contacto</a></li>
-                            <li class="nav-item"><a class="nav-link" href="faq.html">Mapa del Blog</a></li>
+                       
                             {% if not request.user.is_authenticated %}
                             <li class="nav-item btn-primary"><a class="nav-link" href="{% url 'login_user' %}">INICIAR SESIÓN</a></li>
                             <li class="nav-item btn-primary"><a class="nav-link" href="{% url 'registrate' %}">REGISTRATE!</a></li>
                             {% else %}
                             <li class="nav-item btn-primary"><a class="nav-link" href="#edit_user">HOLA! {{ user.username }}</a></li>
-                            <li class="nav-item"><a class="nav-link" href="faq.html">CERRAR SESIÓN</a></li>
-                            <li class="nav-item "><a class="nav-link" href="{% url 'logout' %}">CHAT</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'selectUser' %}">CHAT</a></li>
+                            <li class="nav-item "><a class="nav-link" href="{% url 'logout' %}">CERRAR SESIÓN</a></li>
                             {% endif %}
                             <!--<li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registrate</a>
@@ -187,13 +187,13 @@
         <footer class="bg-dark py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Your Website 2022</div></div>
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; VIAJANDOANDO - PROYECTO CODERHOUSE - 2022</div></div>
                     <div class="col-auto">
-                        <a class="link-light small" href="#!">Privacy</a>
+                        <a class="link-light small" href="#!">Nosotros</a>
                         <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Terms</a>
+                        <a class="link-light small" href="#!">Mapa del Blog</a>
                         <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Contact</a>
+                        <a class="link-light small" href="#!">Contacto</a>
                     </div>
                 </div>
             </div>
