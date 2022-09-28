@@ -62,10 +62,34 @@ def editarPerfil(request):
             usuario.password1=form.cleaned_data["password1"]
             usuario.password2=form.cleaned_data["password2"]
             usuario.save()
-            return render(request, 'inicio.html', {'mensaje':f"Perfil de {usuario} editado"})
+            return render(request, 'index.html', {'mensaje':f"Perfil {usuario} editado correctamente."})
     else:
         form= UserEditForm(instance=usuario)
     return render(request, 'editarPerfil.html', {'form':form, 'usuario':usuario})
+
+
+def agregarAvatar(request):
+    if request.method == 'POST':
+        formulario=AvatarForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            avatarViejo=Avatar.objects.filter(user=request.user)
+            if(len(avatarViejo)>0):
+                avatarViejo.delete()
+            avatar=Avatar(user=request.user, imagen=formulario.cleaned_data['imagen'])
+            avatar.save()
+            return render(request, 'index.html', {'usuario':request.user, 'mensaje':'AVATAR AGREGADO EXITOSAMENTE', "imagen":obtenerAvatar(request)})
+    else:
+        formulario=AvatarForm()
+    return render(request, 'agregarAvatar.html', {'form':formulario, 'usuario':request.user, "imagen":obtenerAvatar(request)})
+
+#####funcion que trae la url del avatar###
+def obtenerAvatar(request):
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista)!=0:
+        imagen=lista[0].imagen.url
+    else:
+        imagen=""
+    return imagen  
 
 def europa(request):
     return render(request , 'europa.html')

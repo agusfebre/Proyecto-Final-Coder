@@ -24,27 +24,28 @@ class UserRegisterForm(UserCreationForm):
 
 #Editar perfil de usuario
 class UserEditForm(UserCreationForm):
-   
-    email = forms.EmailField(label="Modificar E-mail")
-    password1= forms.CharField(label='Contraseña Antigua', widget=forms.PasswordInput)
-    password2= forms.CharField(label='Repetir la contraseña Antigua', widget=forms.PasswordInput)
+    email=forms.EmailField(label='Modificar E-Mail')
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput)
+    first_name=forms.CharField(label='Modificar Nombre')
+    last_name=forms.CharField(label='Modificar Apellido')
 
-    
     class Meta:
         model = User
-        fields = [ 'email', 'password1', 'password2']
-        help_texts = {k:"" for k in fields} 
+        fields = [ 'email', 'password1', 'password2', 'first_name', 'last_name']
+        help_texts = {k:"" for k in fields}
 
-
+class AvatarForm(forms.Form):
+    imagen= forms.ImageField(label="Imagen")
+    
 #Formulario para cargar experiencia de viaje
 class ExperienciaForm(ModelForm):
     class Meta:
         
         model = Experiencia
         fields = [
-            'autor',
             'titulo',  
-           # 'subtitulo', 
+            'subtitulo', 
             'categoria',
             'imagen',
             'cuerpo',

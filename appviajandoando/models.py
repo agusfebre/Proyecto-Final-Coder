@@ -28,11 +28,11 @@ class Avatar(models.Model):
 class Experiencia(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE, default = User.username)
     titulo = models.CharField(max_length=100)
-   # subtitulo = models.CharField(max_length=1000)
+    subtitulo = models.CharField(max_length=1000)
     categoria = models.CharField(max_length=100, choices = CATEGORIAS)
     cuerpo = RichTextField(blank=True, null=True)
     imagen = models.ImageField(blank=True)
 
     def __str__(self):
-        return self.titulo
+        return self.titulo + self.subtitulo
 
