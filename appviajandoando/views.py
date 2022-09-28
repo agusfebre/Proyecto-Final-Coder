@@ -57,3 +57,6 @@ def europa(request):
 
 def asia(request):
     return render(request , 'asia.html')
+
+def america(request):
+    return render(request, 'america.html')
