@@ -1,5 +1,5 @@
 from django.urls import path
-from appviajandoando.views import europa, principal, login_user, registrate, asia
+from appviajandoando.views import *
 
 #import para Statics Files
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -13,7 +13,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     path ('registrate/', registrate, name="registrate"),
     path('europa/', europa, name='europa'),
-    path('asia/', asia, name='asia')
+    path('asia/', asia, name='asia'),
+    path('cargar_experiencia/', cargarexperiencia, name='cargarexperiencia'),
 
 ]
 
