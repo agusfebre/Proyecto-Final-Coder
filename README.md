@@ -19,3 +19,7 @@ Jonathan estuvo a cargo del chat del blog, crear registro de usuarios y form par
 Queremos agradecer a Lautaro que fue nuestro tutor, que siempre estuvo dispuesto a ayudarnos cuando iban surgiendo dudas, y a Franco Di Martino nuestro docente en el curso de Python, el cual siempre fue muy claro y conciso en las explicaciones. 
 
 Creemos que la programación es un factor elemental en el futuro que se nos viene, y ya hoy en dia es una herramienta fundamental para el crecimiento y progreso, no solo personas sino tambien profesional.
+
+
+Se adjunta el Unit Test del proyecto
+[Unit Test viajandoando.xlsx](https://github.com/agusfebre/Proyecto-Final-Coder/files/9670274/Unit.Test.viajandoando.xlsx)
