@@ -20,8 +20,7 @@ def principal(request):
     return render(request, 'index.html', {"url":avatares[0].imagen.url})
 
 def urlImagen():
-
-      return "/media/avatares/avatar_01.png"
+    return "/media/avatares/avatar_01.png"
 
 def login_user(request):
     if request.method=="POST":

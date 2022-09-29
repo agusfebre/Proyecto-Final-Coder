@@ -16,9 +16,13 @@ class entrada(models.Model):
         return self.nombre
 
 CATEGORIAS = (
-    ('Europa', 'Europa'),
-    ('Asia', 'Asia'),
-    ('Sudamerica', 'Sudamerica')
+    ('Europa', 'europa'),
+    ('Asia', 'asia'),
+    ('Sudamerica', 'sudamerica'),
+    ('Centro América', 'centro america'),
+    ('Norte América', 'norte america'),
+    ('Oceania', 'oceania'),
+    ('Africa', 'africa')
 )
 
 

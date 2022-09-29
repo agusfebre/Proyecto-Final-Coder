@@ -8,7 +8,11 @@ from .models import Experiencia
 CATEGORIAS = (
     ('Europa', 'europa'),
     ('Asia', 'asia'),
-    ('Sudamerica', 'sudamerica')
+    ('Sudamerica', 'sudamerica'),
+    ('Centro América', 'centro america'),
+    ('Norte América', 'norte america'),
+    ('Oceania', 'oceania'),
+    ('Africa', 'africa')
 )
 
 #Registro de Usuario
