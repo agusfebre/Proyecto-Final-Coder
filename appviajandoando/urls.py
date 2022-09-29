@@ -1,6 +1,6 @@
 from django.urls import path
 
-from appviajandoando.views import europa, principal, login_user, registrate, asia, america
+from appviajandoando.views import *
 
 from appviajandoando.views import *
 

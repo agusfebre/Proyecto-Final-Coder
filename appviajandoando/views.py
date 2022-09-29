@@ -16,7 +16,12 @@ from datetime import datetime
 # Create your views here.
 
 def principal(request):
-    return render(request, 'index.html')
+    avatares = Avatar.objects.filter(user=request.user.id)
+    return render(request, 'index.html', {"url":avatares[0].imagen.url})
+
+def urlImagen():
+
+      return "/media/avatares/avatar_01.png"
 
 def login_user(request):
     if request.method=="POST":
