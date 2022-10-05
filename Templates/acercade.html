@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block centroDePagina %}
+<header class="bg-dark py-5">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2">Acerca de los creadores del Blog</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">Este blog fue ideado y desarrollado por <strong>Agustin Febre</strong>, <strong>Jorge</strong> y <strong>Jonathan Valentin</strong>, estudiantes de Python en CODERHOUSE; 
+                        trabajamos con las herramientas Visual Studio Code y GitHub para compartir el codigo y archivos, desarrollamos este blog con Python y Django, 
+                        tambien se aplicaron esteticas CSS.<br>
+                        Abajo encontaras mas informacion sobre nosotros...</p>
+                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="/media/acercade/nosotros-pagina.png" alt="..." /></div>
+        </div>
+    </div>
+</header>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="row align-items-md-stretch mb-5">
+
+    <div class="col-md-4">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <img src="/media/acercade/agustin.jpeg"
+                 alt="foto agustin" class="img-thumbnail rounded-circle" width="300" height="300">
+            <h2 class="my-3">Agustin Febre</h2>
+            <p> Hola mi nombre es Agustín Febre, licenciado en Turismo. Rubro en el cual me dedique casi unos 10 años, 
+                hasta que dedicí ayudar a mi padre con la Administración de una academia de Inglés, la cual hasta el día de hoy me encuentro manejando. 
+                Decidí realizar este curso de Python, ya que en mí opinión personal, es el presente y futuro.<br> Mi idea es adquirir conocimientos para 
+                poder mejorar el sistema de carga de alumnos, cuotas y manejo de la academia. Cómo así también complementar mi profesión con alguna 
+                posibilidad laboral dentro del rubro IT.</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="h-100 p-5 text-white bg-dark border rounded-3">
+            <img src="/media/acercade/jorge.jpeg"
+                 alt="foto juan" class="img-thumbnail rounded-circle" width="300" height="300">
+            <h2 class="my-3">Jorge Aguirre</h2>
+            <p>Programador de Buenos Aires, Argentina. <br> Apasionado por aprender cada vez más del mundo de la
+                programación, me motiva la curiosidad por entender cómo funcionan las cosas y el deseo de optimizar
+                todo tipo de procesos. Actualmente, programo en python gracias a lo que he aprendido mirando videos,
+                probando independietemente y en cursos. Espero siempre seguir aprendiendo</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="h-100 p-5 text-white bg-dark border rounded-3">
+            <img src="/media/acercade/jonathan.jpeg"
+                 alt="foto juan" class="img-thumbnail rounded-circle" width="300" height="300">
+            <h2 class="my-3">Jonathan Valentín</h2>
+            <p> Tengo 32 años y vivo en una pequeña ciudad en la Provincia de Buenos Aires llamada Daireaux, estuve viviendo casi diez años en La Plata 
+                en donde me capacite en la carrera de Sistemas y trabaje desde el año 2014 en rubro informático en el cual sigo trabajando.
+                <br>Hace un año decidí cambiar mi futuro ingresando al mundo de la programación y es así como encontré CODERHOUSE.
+                Este es mi primer proyecto, de muchos que vendrán. <br><a href="https://www.linkedin.com/in/jonathan-valentín-mayereaux">Clic aquí para ver mi Linkedin</a> 
+        
+            </p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

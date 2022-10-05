@@ -1,0 +1,96 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block centroDePagina %} 
+{{ mensaje }}
+<header class="bg-dark py-5">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2">Experiencias cargadas</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">Descripcion de América</p>
+                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://freewalkertours.com/wp-content/uploads/cosas-que-hacer-en-r%C3%ADo-cristo-redentor-1100x620.jpg" alt="..." /></div>
+        </div>
+    </div>
+</header>
+
+{% endblock %}
+
+{% block seleccionarViaje %}
+<section class="py-5">
+    <div class="container px-5 my-5">
+        
+            <div class="container px-5 my-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6">
+                        <div class="text-center">
+                            <h2 class="fw-bolder">Experiencias de viajeros</h2>
+                            <p class="lead fw-normal text-muted mb-5">Últimas experiencias cargadas por nosotros, viajeros por el globo como vos!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+
+        <!-- Comentario: Acá se muestran las ultimas tres experiencias subidas -->
+        
+        <div class="row gx-5">
+        {% for exp in experiencias %}
+             
+            <div class="col-lg-4 mb-5">
+
+                <div class="card h-100 shadow border-0">
+                   <!--  Imagen de la experiencia -->
+                   <img class="card-img-top" src="media/{{ exp.foto }}" alt="..." />
+
+                    <div class="card-body p-4">
+                       <!--  Categoria de la experiencia -->
+                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ exp.pais }}</div>
+                        <!-- titulo de la experiencia -->
+                        <a class="text-decoration-none link-dark stretched-link" href="{% url 'leerExperiencia' exp.id %}"><h5 class="card-title mb-3">{{ exp.titulo }}</h5></a>
+                        <!-- Primeras lineas... -->
+                        <p class="card-text mb-0">{{ exp.cuerpo|safe }}</p>
+                    </div>
+  
+                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+
+                        <div class="d-flex align-items-end justify-content-between">
+
+                            <div class="d-flex align-items-center">
+                                <!-- foto del autor -->
+                                {% for avatar in avatares %}
+                                {% if avatar.user_id == exp.autor_id  %}
+                                <img class="rounded-circle me-3" src="media/{{ avatar.imagen }}" alt="..." width="28" height="28" />  
+                                {% endif %}
+                                {% endfor %}
+                                
+                                <div class="small">
+                                    <!-- Nombre del autor -->
+                                    <div class="fw-bold">{{ exp.autor }}</div>
+                                    <!-- Fecha de subida -->
+                                    <div class="text-muted">{{ exp.fecha }}</div>
+                                </div>
+                                
+                            </div>
+                                 
+                        </div>
+                    </div>  
+                                                                                                  
+                </div> 
+               
+                    <div class="card shadow border-2">
+                        <a class="badge bg-primary bg-gradient rounded-pill mb-2" href="{% url 'eliminarExperiencia' exp.id %}">ELIMINAR</a>
+                        <a class="badge bg-primary bg-gradient rounded-pill mb-2" href="{% url 'editarExperiencia' exp.id %}">EDITAR</a>      
+                    </div> 
+                
+            </div> 
+        {% endfor %}
+        </div>
+    <div>
+
+{% endblock %}

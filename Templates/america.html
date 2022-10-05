@@ -8,11 +8,11 @@
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-center text-xl-start">
-                    <h1 class="display-5 fw-bolder text-white mb-2">Pagina de America</h1>
-                    <p class="lead fw-normal text-white-50 mb-4">Descripcion de America</p>
+                    <h1 class="display-5 fw-bolder text-white mb-2">Viajes en América</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">Aqui se veran experiencias de viajeros en paises del continente americano de norte a sur...</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
-                        <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'cargarexperiencia' %}">Contar Experiencia</a>
+                        
                     </div>
                 </div>
             </div>
@@ -29,74 +29,63 @@
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-8 col-xl-6">
                 <div class="text-center">
-                    <h2 class="fw-bolder">Lugares mas visitados</h2>
-                    <p class="lead fw-normal text-muted mb-5">Comenta o publica tus experiencias de tus viajes</p>
+                    <h2 class="fw-bolder">Últimas Experiencias en América</h2>
+                    <p class="lead fw-normal text-muted mb-5">Comentá ó publicá tus experiencias de tus viajes</p>
                 </div>
             </div>
         </div>
         <div class="row gx-5">
-            <div class="col-lg-4 mb-5">
-                <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="https://www.peru.travel/Contenido/Atractivo/Imagen/pe/145/1.4/Principal/Machu%20Picchu.jpg" alt="..." />
-                    <div class="card-body p-4">
-                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">Peru</div>
-                        <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Machu Picchu</h5></a>
-                        <p class="card-text mb-0">Esta antigua ciudad inca es uno de los tesoros más preciados de Perú. Fue construida a mediados del siglo XV y se cree que fue una de las residencias del noveno inca del Tahuantinsuyo, Pachacútec, aunque en ella también están los restos de un santuario. Su nombre significa montaña vieja, y hace alusión al lugar donde se ubica, a unos 2453 metros de altura, en un promontorio rocoso entre los cerros de Huchuy Picchu y Huayna Picchu.</p>
-                    </div>
-                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                        <div class="d-flex align-items-end justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                <div class="small">
-                                    <div class="fw-bold">Kelly Rowan</div>
-                                    <div class="text-muted">March 12, 2022 &middot; 6 min read</div>
-                                </div>
-                            </div>
+            {% for exp in experiencias %}
+                 
+                <div class="col-lg-4 mb-5">
+    
+                    <div class="card h-100 shadow border-0">
+                       <!--  Imagen de la experiencia -->
+                       <img class="card-img-top" src="/media/{{ exp.foto }}" alt="..." />
+    
+                        <div class="card-body p-4">
+                           <!--  Categoria de la experiencia -->
+                            <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ exp.pais }}</div>
+                            <!-- titulo de la experiencia -->
+                            <a class="text-decoration-none link-dark stretched-link" href="{% url 'leerExperiencia' exp.id %}"><h5 class="card-title mb-3">{{ exp.titulo }}</h5></a>
+                            <!-- Primeras lineas... -->
+                            <p class="card-text mb-0">{{ exp.cuerpo|safe }}</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-5">
-                <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="https://media.traveler.es/photos/613768f03decec3303bab7da/16:9/w_1856,h_1044,c_limit/158835.jpg" alt="..." />
-                    <div class="card-body p-4">
-                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">Argentina</div>
-                        <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Cataratas del Iguazu</h5></a>
-                        <p class="card-text mb-0">Patrimonio natural de la humanidad desde 1984 y una de las 7 maravillas naturales del mundo desde 2011, el Parque Nacional Iguazú es un universo natural único. Lleno de vida, abundante vegetación y 275 saltos, entre ellos la Garganta del Diablo, cayendo a 82 metros de altura, es el lugar ideal para conectar con la naturaleza.</p>
-                    </div>
-                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                        <div class="d-flex align-items-end justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                <div class="small">
-                                    <div class="fw-bold">Josiah Barclay</div>
-                                    <div class="text-muted">March 23, 2022 &middot; 4 min read</div>
+      
+                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+    
+                            <div class="d-flex align-items-end justify-content-between">
+    
+                                <div class="d-flex align-items-center">
+                                    <!-- foto del autor -->
+                                    {% for avatar in avatares %}
+                                    {% if avatar.user_id == exp.autor_id  %}
+                                    <img class="rounded-circle me-3" src="/media/{{ avatar.imagen }}" alt="..." width="28" height="28" />  
+                                    {% endif %}
+                                    {% endfor %}
+                                    
+                                    <div class="small">
+                                        <!-- Nombre del autor -->
+                                        <div class="fw-bold">{{ exp.autor }}</div>
+                                        <!-- Fecha de subida -->
+                                        <div class="text-muted">{{ exp.fecha }}</div>
+                                    </div>
+                                    
                                 </div>
+                                     
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </div>  
+                                                                                                      
+                    </div> 
+                   
+                        <div class="card shadow border-2">
+                            <a class="badge bg-primary bg-gradient rounded-pill mb-2" href="{% url 'eliminarExperiencia' exp.id %}">ELIMINAR</a>
+                            <a class="badge bg-primary bg-gradient rounded-pill mb-2" href="{% url 'editarExperiencia' exp.id %}">EDITAR</a>      
+                        </div> 
+                    
+                </div> 
+            {% endfor %}
             </div>
-            <div class="col-lg-4 mb-5">
-                <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="https://www.mexicodesconocido.com.mx/wp-content/uploads/2010/05/chichen-itza-arquitectura-que-visitar-900x594.png" alt="..." />
-                    <div class="card-body p-4">
-                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">Mexico</div>
-                        <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Chichen Itza</h5></a>
-                        <p class="card-text mb-0">La pirámide de Kukulcán se eleva con precisión geométrica en medio de una explanada que hace mil años fue el centro político, religioso y cultural del imperio maya. Chichén Itzá significa "boca del pozo de los itzaes", en alusión al cenote situado al norte de la pirámide y que era considerado un enclave sagrado, además de una fuente de agua dulce esencial para aquella ciudad de templos y sabios astrónomos</p>
-                    </div>
-                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                        <div class="d-flex align-items-end justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                <div class="small">
-                                    <div class="fw-bold">Evelyn Martinez</div>
-                                    <div class="text-muted">April 2, 2022 &middot; 10 min read</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+       
         </div>
         {% endblock %}

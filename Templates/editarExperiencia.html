@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
+<div class="conteiner text-center">
+    <h1 class="text-center">EDITANDO EXPERIENCIA:</h1>
+    <h3>{{ titulo }}</h3>
+    <div class="conteiner card text-center">
+        <form class="col-md-10 offset-md-1 card card-body p-5 text-center" action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            {{ formu.media }}
+            {{ formu }}     
+            <button class="btn-primary" type="submit">Modificar</button>
+        
+        </form>
+    </div>
+</div>
+
+{% endblock %}

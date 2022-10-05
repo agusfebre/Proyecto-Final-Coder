@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+{% if mensaje %}
+<h2>{{ mensaje }}</h2>
+{% else %}
+
+<div class="container px-5 my-5">
+    <h1 class="card-title mb-3">{{ experiencia.titulo }} </h1>
+    <h3>{{ experiencia.subtitulo }}</h3>
+    <img class="card-img-top" src="/media/{{ experiencia.foto }}" alt="...">
+    <br>
+    <p class="card-text mb-0">{{ experiencia.cuerpo|safe }}</p>
+    
+    <div class="d-flex align-items-end justify-content-between">
+
+        <div class="d-flex align-items-center">
+            <!-- foto del autor -->
+            {% for avatar in avatares %}
+            {% if avatar.user_id == experiencia.autor_id  %}
+            <img class="rounded-circle me-3" src="/media/{{ avatar.imagen }}" alt="..." width="28" height="28" />  
+            {% endif %}
+            {% endfor %}
+            
+            <div class="small">
+                <!-- Nombre del autor -->
+                <div class="fw-bold">{{ experiencia.autor }}</div>
+                <!-- Fecha de subida -->
+                <div class="text-muted">{{ experiencia.fecha }}</div>
+            </div>
+            
+        </div>
+             
+    </div>
+
+    <div class="card-footer p-4 pt-5 bg-transparent border-top-0">
+        <h3>COMENTARIOS:</h3>
+        
+    </div>
+
+
+</div>
+
+
+
+
+{% endif %}
+
+{% endblock %}

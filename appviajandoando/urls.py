@@ -22,6 +22,11 @@ urlpatterns = [
     path ('cargar_experiencia/', cargarexperiencia, name='cargarexperiencia'),
     path ('editarPerfil', editarPerfil, name="editarPerfil"),
     path ('agregarAvatar', agregarAvatar, name="agregarAvatar"),
+    path ('acercade', acercade, name="acercade"),
+    path ('ultimasExperiencias', ultimasExperiencias, name="ultimasExperiencias"),
+    path ('editarExperiencia/<id>', editarExperiencia, name="editarExperiencia"),
+    path ('eliminarExperiencia/<id>', eliminarExperiencia, name="eliminarExperiencia"),
+    path ('leerExperiencia/<id>', leerExperiencia, name="leerExperiencia"),
 
 
 ]

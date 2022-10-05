@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .models import Experiencia
 
 
+
 CATEGORIAS = (
     ('Europa', 'europa'),
     ('Asia', 'asia'),
@@ -46,14 +47,16 @@ class AvatarForm(forms.Form):
 #Formulario para cargar experiencia de viaje
 class ExperienciaForm(ModelForm):
     class Meta:
-        
         model = Experiencia
         fields = [
+            'autor',
             'titulo',  
-            'subtitulo', 
+            'subtitulo',
+            'pais', 
             'categoria',
-            'imagen',
+            'foto',
             'cuerpo',
+            
             
             ]
     

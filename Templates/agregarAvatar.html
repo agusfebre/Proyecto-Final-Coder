@@ -5,7 +5,7 @@
 <div class="conteiner col-md-4 offset-md-4 card card-body p-3 text-center">
         <div class="conteiner text-center">
             <h1 class="mb-5">Agregando Avatar para usuario: {{ usuario }}</h1>
-            <img src="{{ imagen }}" alt=""> 
+            <div class="conteiner card"><img src="{{ imagen }}" alt=""> </div>
         </div>
     <h1>AGREGAR AVATAR</h1>
     <form action="{% url 'agregarAvatar' %}"  method="POST" enctype="multipart/form-data"> {% csrf_token %}

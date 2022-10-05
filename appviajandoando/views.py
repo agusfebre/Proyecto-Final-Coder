@@ -12,12 +12,25 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from datetime import datetime
+#Requiere Logearse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def principal(request):
-    avatares = Avatar.objects.filter(user=request.user.id)
-    return render(request, 'index.html', {"url":avatares[0].imagen.url})
+    experiencias=Experiencia.objects.all()
+    avatares=Avatar.objects.all()
+    experiencias_new = []
+    for exp in experiencias:
+        exp.cuerpo=exp.cuerpo.split('</p>')[0]
+        if len(exp.cuerpo) > 250:
+            exp.cuerpo=exp.cuerpo[0:250]
+            exp.cuerpo=exp.cuerpo+'...'
+        experiencias_new.append(exp)
+    experiencias_new=reversed(experiencias_new)
+
+    return render(request, 'index.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares }) 
+    
 
 def urlImagen():
     return "/media/avatares/avatar_01.png"
@@ -28,19 +41,17 @@ def login_user(request):
         if form.is_valid():
             usu=request.POST["username"]
             clave=request.POST["password"]
-
             usuario=authenticate(username=usu, password=clave)
             if usuario is not None:
                 login(request, usuario)
-                return render(request, 'login_user.html', {'mensaje':f"Bienvenido {usuario}"})
+                return render(request, 'index.html', {'mensaje':f"Bienvenido {usuario}", "imagen":obtenerAvatar(request)})
             else:
                 return render(request, 'login_user.html', {"form":form, 'mensaje':'Usuario o contraseña incorrectos'})
         else:
             return render(request, 'login_user.html', {"form":form, 'mensaje':'Usuario o contraseña incorrectos'})
     else:
         form=AuthenticationForm()
-        return render(request, 'login_user.html', {'form':form})
-
+        return render(request, 'login_user.html', {'form':form, "imagen":obtenerAvatar(request)})
 
 def registrate(request):
     if request.method=="POST":
@@ -54,7 +65,8 @@ def registrate(request):
     else:
         form=UserRegisterForm()
     return render(request, 'registrate.html', {'form':form})
-
+    
+@login_required
 def editarPerfil(request):
     usuario=request.user
     if request.method=="POST":
@@ -66,10 +78,10 @@ def editarPerfil(request):
             usuario.password1=form.cleaned_data["password1"]
             usuario.password2=form.cleaned_data["password2"]
             usuario.save()
-            return render(request, 'index.html', {'mensaje':f"Perfil {usuario} editado correctamente."})
+            return render(request, 'index.html', {'mensaje':f"Perfil {usuario} editado correctamente.", "imagen":obtenerAvatar(request)})
     else:
         form= UserEditForm(instance=usuario)
-    return render(request, 'editarPerfil.html', {'form':form, 'usuario':usuario})
+    return render(request, 'editarPerfil.html', {'form':form, 'usuario':usuario, "imagen":obtenerAvatar(request)})
 
 
 def agregarAvatar(request):
@@ -88,6 +100,8 @@ def agregarAvatar(request):
 
 #####funcion que trae la url del avatar###
 def obtenerAvatar(request):
+    if str(request.user) == 'AnonymousUser':
+        return ""        
     lista=Avatar.objects.filter(user=request.user)
     if len(lista)!=0:
         imagen=lista[0].imagen.url
@@ -96,23 +110,135 @@ def obtenerAvatar(request):
     return imagen  
 
 def europa(request):
-    return render(request , 'europa.html')
+    experiencias=Experiencia.objects.filter(categoria='Europa')
+    avatares=Avatar.objects.all()
+    experiencias_new = []
+    for exp in experiencias:
+        exp.cuerpo=exp.cuerpo.split('</p>')[0]
+        if len(exp.cuerpo) > 250:
+            exp.cuerpo=exp.cuerpo[0:250]
+            exp.cuerpo=exp.cuerpo+'...'
+        experiencias_new.append(exp)
+    experiencias_new=reversed(experiencias_new)
+    return render(request, 'europa.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })
 
 def asia(request):
-    return render(request , 'asia.html')
-
+    experiencias=Experiencia.objects.filter(categoria='Asia')
+    avatares=Avatar.objects.all()
+    experiencias_new = []
+    for exp in experiencias:
+        exp.cuerpo=exp.cuerpo.split('</p>')[0]
+        if len(exp.cuerpo) > 250:
+            exp.cuerpo=exp.cuerpo[0:250]
+            exp.cuerpo=exp.cuerpo+'...'
+        experiencias_new.append(exp)
+    experiencias_new=reversed(experiencias_new)
+    return render(request, 'asia.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })
 
 def america(request):
-    return render(request, 'america.html')
+    experiencias=Experiencia.objects.filter(categoria='Sudamerica')
+    avatares=Avatar.objects.all()
+    experiencias_new = []
+    for exp in experiencias:
+        exp.cuerpo=exp.cuerpo.split('</p>')[0]
+        if len(exp.cuerpo) > 250:
+            exp.cuerpo=exp.cuerpo[0:250]
+            exp.cuerpo=exp.cuerpo+'...'
+        experiencias_new.append(exp)
+    experiencias_new=reversed(experiencias_new)
+
+    return render(request, 'america.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })
+
+def ultimasExperiencias(request):
+    experiencias=Experiencia.objects.all()
+    avatares=Avatar.objects.all()
+    experiencias_new = []
+    for exp in experiencias:
+        exp.cuerpo=exp.cuerpo.split('</p>')[0]
+        if len(exp.cuerpo) > 250:
+            exp.cuerpo=exp.cuerpo[0:250]
+            exp.cuerpo=exp.cuerpo+'...'
+        experiencias_new.append(exp)
+    experiencias_new=reversed(experiencias_new)
+
+    return render(request, 'ultimasExperiencias.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })  
+
+def acercade(request):
+    return render(request, 'acercade.html', {"imagen":obtenerAvatar(request)})
 
 def cargarexperiencia(request):
     if request.method == 'POST':
-        form = ExperienciaForm(request.POST)
+        form = ExperienciaForm(request.POST, request.FILES)
         if form.is_valid():
-            post_item = form.save(commit=False)
-            post_item.save()
-            return redirect('/')
+            info= form.cleaned_data
+            autor= info["autor"]
+            titulo= info["titulo"]
+            subtitulo= info["subtitulo"]
+            pais= info["pais"]
+            categoria= info["categoria"]
+            foto= info["foto"]
+            cuerpo= info["cuerpo"]
+            carga_exp= Experiencia(autor=autor, titulo=titulo, subtitulo=subtitulo, pais=pais, categoria=categoria, foto=foto, cuerpo=cuerpo)
+            carga_exp.save()
+            
+            return render(request, 'index.html', {'usuario':request.user, 'mensaje':'Cargaste una experiencia nueva al Blog, Muchas gracias por tu colaboración.', "imagen":obtenerAvatar(request)})
     else:
         form = ExperienciaForm()
-    return render(request, 'nueva_experiencia.html', {'form':form})
+    return render(request, 'nueva_experiencia.html', {'form':form, "imagen":obtenerAvatar(request)})
+
+def editarExperiencia(request,id):
+    #Traer Experiencia a editar
+    experiencia = Experiencia.objects.get(id = id)
+
+    if request.method == 'POST':
+        #Viene lleno el formulario con los datos de la experiencia a editar
+        form = ExperienciaForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            #Cambio los datos
+            informacion = form.cleaned_data
+            
+            print(str(informacion))
+
+            experiencia.autor=informacion['autor']
+            experiencia.titulo=informacion['titulo']
+            experiencia.subtitulo=informacion['subtitulo']
+            experiencia.pais=informacion['pais']
+            experiencia.categoria=informacion['categoria']
+            experiencia.foto=informacion['foto']
+            experiencia.cuerpo=informacion['cuerpo']
+		    #Guardo el formulario modificado
+            experiencia.save()
+            return render(request, "index.html")
+
+    else:
+        form= ExperienciaForm(
+             initial={
+                'autor': experiencia.autor, 
+                'titulo':experiencia.titulo , 
+                'subtitulo':experiencia.subtitulo, 
+                'pais':experiencia.pais ,
+                'categoria':experiencia.categoria , 
+                'foto':experiencia.foto,
+                'cuerpo':experiencia.cuerpo,
+            }
+        )
+    
+    return render(request, "editarExperiencia.html", {"formu": form, "titulo":experiencia.titulo, "id":experiencia.id})
+        
+def eliminarExperiencia(request, id):
+    experiencia = Experiencia.objects.get(id=id)
+    experiencia.delete()
+    experiencia = Experiencia.objects.all()
+    contexto ={"experiencia":experiencia}
+    return render(request,"america_exp.html",contexto)
+
+def leerExperiencia(request, id):
+    experiencia=Experiencia.objects.get(id=id)
+    avatares=Avatar.objects.all()
+    print(experiencia)
+    return render(request, "leerExperiencia.html", {"experiencia":experiencia, "id":experiencia.id, "avatares":avatares})
+
+
+
 
