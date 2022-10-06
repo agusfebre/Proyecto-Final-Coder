@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block centroDePagina %}
+
+{{ mensaje }}
+<div class="conteiner col-md-4 offset-md-4 card card-body p-3 text-center">
+    <div class="conteiner text-center">
+        <h1 class="mb-5">Queremos saber su opinión:</h1>
+    </div>
+
+    <form action="contacto"  method="POST">   {% csrf_token %}
+        <table class="table">
+        {{ form.as_table }}
+        </table> 
+        <button type="submit">ENVAIR</button>
+        
+    </form>
+</div>
+
+
+{% endblock %}

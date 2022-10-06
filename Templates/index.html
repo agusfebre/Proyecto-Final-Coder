@@ -29,7 +29,7 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'america' %}">AMÉRICA</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'europa' %}">EUROPA</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'asia' %}">ASIA</a></li>
-                            <li class="nav-item"><a class="nav-link" href="faq.html">CONTACTO</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">CONTACTO</a></li>
                        
                             {% if  request.user.is_authenticated %}
                         </li>
@@ -75,7 +75,7 @@
             </header>
             {% endblock %}
             <!-- Features section-->
-           <div class="container card text-center"><h1> {{ mensaje }}</h1> </div>
+           <div class="container text-center"><h1> {{ mensaje }}</h1> </div>
             {% block content %}
 
             {% endblock %}
@@ -84,29 +84,26 @@
             {% block seleccionarViaje %}
             <section class="py-5">
                 <div class="container px-5 my-5">
-                    
-                        <div class="container px-5 my-5">
-                            <div class="row gx-5 justify-content-center">
-                                <div class="col-lg-8 col-xl-6">
-                                    <div class="text-center">
-                                        <h2 class="fw-bolder">Experiencias de viajeros</h2>
-                                        <p class="lead fw-normal text-muted mb-5">Últimas experiencias cargadas por nosotros, viajeros por el globo como vos!</p>
-                                    </div>
+                    <div class="container px-5 my-5">
+                        <div class="row gx-5 justify-content-center">
+                            <div class="col-lg-8 col-xl-6">
+                                <div class="text-center">
+                                    <h2 class="fw-bolder">Experiencias de viajeros</h2>
+                                    <p class="lead fw-normal text-muted mb-5">Últimas experiencias cargadas por nosotros, viajeros por el globo como vos!</p>
                                 </div>
                             </div>
-                        </div>   
+                        </div>
+                    </div>   
             
                     <!-- Comentario: Acá se muestran las ultimas tres experiencias subidas -->
                     
                     <div class="row gx-5">
-                    {% for exp in experiencias %}
-                         
+                        {% for exp in experiencias %}
                         <div class="col-lg-4 mb-5">
-            
+                                
                             <div class="card h-100 shadow border-0">
                                <!--  Imagen de la experiencia -->
-                               <img class="card-img-top" src="media/{{ exp.foto }}" alt="..." />
-            
+                               <img class="card-img-top" src="media/{{ exp.foto }}" alt="..." />            
                                 <div class="card-body p-4">
                                    <!--  Categoria de la experiencia -->
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ exp.pais }}</div>
@@ -117,9 +114,7 @@
                                 </div>
               
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-            
-                                    <div class="d-flex align-items-end justify-content-between">
-            
+                                    <div class="d-flex align-items-end justify-content-between">           
                                         <div class="d-flex align-items-center">
                                             <!-- foto del autor -->
                                             {% for avatar in avatares %}
@@ -127,34 +122,29 @@
                                             <img class="rounded-circle me-3" src="media/{{ avatar.imagen }}" alt="..." width="28" height="28" />  
                                             {% endif %}
                                             {% endfor %}
-                                            
                                             <div class="small">
                                                 <!-- Nombre del autor -->
                                                 <div class="fw-bold">{{ exp.autor }}</div>
                                                 <!-- Fecha de subida -->
                                                 <div class="text-muted">{{ exp.fecha }}</div>
                                             </div>
-                                            
-                                        </div>
-                                             
-                                    </div>
-                                </div>  
-                                                                                                              
-                            </div> 
-                                {% if user.username == exp.autor %}
-                                <div class="card shadow border-2">
-                                    <a class="badge bg-primary bg-gradient rounded-pill mb-2" href="{% url 'eliminarExperiencia' exp.id %}">ELIMINAR</a>
-                                    <a class="badge bg-primary bg-gradient rounded-pill mb-2" href="{% url 'editarExperiencia' exp.id %}">EDITAR</a>      
-                                </div> 
-                                {% endif %}
-                            
+                                        </div>                
+                                    </div>                                                 
+                                </div>          
+                            </div>  
+                            {% if exp.autor == user %}
+                            <p>
+                                <a class="badge bg-primary bg-gradient  mb-2" href="{% url 'eliminarExperiencia' exp.id %}">ELIMINAR</a>
+                                <a class="badge bg-primary bg-gradient  mb-2" href="{% url 'editarExperiencia' exp.id %}">EDITAR</a>     
+                            </p> 
+                            {% endif %}                   
                         </div> 
-                    {% endfor %}
+                        {% endfor %}
                     </div>
-                <div>
-                </section>
+                </div>
+           
             {% endblock %}
-            <section>
+                
                     <!-- Call to action-->
                     <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
                         <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
@@ -171,8 +161,8 @@
                             </div>
                         </div>
                     </aside>
-                </div>
-            </section>
+                
+            
         </main>
         <!-- Footer-->
         <footer class="bg-dark py-4 mt-auto">

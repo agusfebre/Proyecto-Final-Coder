@@ -31,6 +31,11 @@ SECRET_KEY = 'django-insecure-&!78-*k&pj_gr6bv%t8k$9+qis85@3l^53(=&cj=mp6#dp-!^b
 DEBUG = True
 
 ALLOWED_HOSTS = []
+#Datos para enviar email a 'MAILTRAP.io' 
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '1525c143302962'
+EMAIL_HOST_PASSWORD = 'deddafba4388d9'
+EMAIL_PORT = '2525'
 
 
 # Application definition

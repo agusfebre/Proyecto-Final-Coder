@@ -1,5 +1,5 @@
 from http.client import HTTPResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from appviajandoando.forms import *
 from appviajandoando.models import *
@@ -14,23 +14,31 @@ from django.contrib.auth.models import User
 from datetime import datetime
 #Requiere Logearse
 from django.contrib.auth.decorators import login_required
+#Para envio de Email 
+from django.core.mail import EmailMessage, send_mail
+from django.template.loader import render_to_string
+from django.views.generic import TemplateView
+
 
 # Create your views here.
 
 def principal(request):
     experiencias=Experiencia.objects.all()
     avatares=Avatar.objects.all()
-    experiencias_new = []
-    for exp in experiencias:
-        exp.cuerpo=exp.cuerpo.split('</p>')[0]
-        if len(exp.cuerpo) > 250:
-            exp.cuerpo=exp.cuerpo[0:250]
-            exp.cuerpo=exp.cuerpo+'...'
-        experiencias_new.append(exp)
-    experiencias_new=reversed(experiencias_new)
+    if not experiencias:
+        return render(request, 'principal.html', {"imagen":obtenerAvatar(request), "avatares":avatares, 'mensaje':'No se cargaron experiencias aún.'}) 
+    else:
+        experiencias_new = []
+        for exp in experiencias:
+            exp.cuerpo=exp.cuerpo.split('</p>')[0]
+            if len(exp.cuerpo) > 250:
+                exp.cuerpo=exp.cuerpo[0:250]
+                exp.cuerpo=exp.cuerpo+'...'
+            experiencias_new.append(exp)
+        experiencias_new=reversed(experiencias_new)
 
-    return render(request, 'index.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares }) 
-    
+        return render(request, 'index.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares }) 
+        
 
 def urlImagen():
     return "/media/avatares/avatar_01.png"
@@ -112,56 +120,66 @@ def obtenerAvatar(request):
 def europa(request):
     experiencias=Experiencia.objects.filter(categoria='Europa')
     avatares=Avatar.objects.all()
-    experiencias_new = []
-    for exp in experiencias:
-        exp.cuerpo=exp.cuerpo.split('</p>')[0]
-        if len(exp.cuerpo) > 250:
-            exp.cuerpo=exp.cuerpo[0:250]
-            exp.cuerpo=exp.cuerpo+'...'
-        experiencias_new.append(exp)
-    experiencias_new=reversed(experiencias_new)
-    return render(request, 'europa.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })
+    if not experiencias:
+        return render(request, 'europa.html', {"imagen":obtenerAvatar(request), "avatares":avatares, 'mensaje':'No se cargaron experiencias aún.'}) 
+    else:
+        experiencias_new = []
+        for exp in experiencias:
+            exp.cuerpo=exp.cuerpo.split('</p>')[0]
+            if len(exp.cuerpo) > 250:
+                exp.cuerpo=exp.cuerpo[0:250]
+                exp.cuerpo=exp.cuerpo+'...'
+            experiencias_new.append(exp)
+        experiencias_new=reversed(experiencias_new)
+        return render(request, 'europa.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })
 
 def asia(request):
     experiencias=Experiencia.objects.filter(categoria='Asia')
     avatares=Avatar.objects.all()
-    experiencias_new = []
-    for exp in experiencias:
-        exp.cuerpo=exp.cuerpo.split('</p>')[0]
-        if len(exp.cuerpo) > 250:
-            exp.cuerpo=exp.cuerpo[0:250]
-            exp.cuerpo=exp.cuerpo+'...'
-        experiencias_new.append(exp)
-    experiencias_new=reversed(experiencias_new)
-    return render(request, 'asia.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })
+    if not experiencias:
+        return render(request, 'asia.html', {"imagen":obtenerAvatar(request), "avatares":avatares, 'mensaje':'No se cargaron experiencias aún.'}) 
+    else:
+        experiencias_new = []
+        for exp in experiencias:
+            exp.cuerpo=exp.cuerpo.split('</p>')[0]
+            if len(exp.cuerpo) > 250:
+                exp.cuerpo=exp.cuerpo[0:250]
+                exp.cuerpo=exp.cuerpo+'...'
+            experiencias_new.append(exp)
+        experiencias_new=reversed(experiencias_new)
+        return render(request, 'asia.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })
 
 def america(request):
     experiencias=Experiencia.objects.filter(categoria='Sudamerica')
     avatares=Avatar.objects.all()
-    experiencias_new = []
-    for exp in experiencias:
-        exp.cuerpo=exp.cuerpo.split('</p>')[0]
-        if len(exp.cuerpo) > 250:
-            exp.cuerpo=exp.cuerpo[0:250]
-            exp.cuerpo=exp.cuerpo+'...'
-        experiencias_new.append(exp)
-    experiencias_new=reversed(experiencias_new)
-
-    return render(request, 'america.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })
+    if not experiencias:
+        return render(request, 'america.html', {"imagen":obtenerAvatar(request), "avatares":avatares, 'mensaje':'No se cargaron experiencias aún.'}) 
+    else:
+        experiencias_new = []
+        for exp in experiencias:
+            exp.cuerpo=exp.cuerpo.split('</p>')[0]
+            if len(exp.cuerpo) > 250:
+                exp.cuerpo=exp.cuerpo[0:250]
+                exp.cuerpo=exp.cuerpo+'...'
+            experiencias_new.append(exp)
+        experiencias_new=reversed(experiencias_new)
+        return render(request, 'america.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })
 
 def ultimasExperiencias(request):
     experiencias=Experiencia.objects.all()
     avatares=Avatar.objects.all()
-    experiencias_new = []
-    for exp in experiencias:
-        exp.cuerpo=exp.cuerpo.split('</p>')[0]
-        if len(exp.cuerpo) > 250:
-            exp.cuerpo=exp.cuerpo[0:250]
-            exp.cuerpo=exp.cuerpo+'...'
-        experiencias_new.append(exp)
-    experiencias_new=reversed(experiencias_new)
-
-    return render(request, 'ultimasExperiencias.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })  
+    if not experiencias:
+        return render(request, 'ultimasExperiencias.html', {"imagen":obtenerAvatar(request), "avatares":avatares, 'mensaje':'No se cargaron experiencias aún.'}) 
+    else:
+        experiencias_new = []
+        for exp in experiencias:
+            exp.cuerpo=exp.cuerpo.split('</p>')[0]
+            if len(exp.cuerpo) > 250:
+                exp.cuerpo=exp.cuerpo[0:250]
+                exp.cuerpo=exp.cuerpo+'...'
+            experiencias_new.append(exp)
+        experiencias_new=reversed(experiencias_new)
+        return render(request, 'ultimasExperiencias.html',  {"imagen":obtenerAvatar(request), "experiencias":experiencias_new, "avatares":avatares })  
 
 def acercade(request):
     return render(request, 'acercade.html', {"imagen":obtenerAvatar(request)})
@@ -223,7 +241,6 @@ def editarExperiencia(request,id):
                 'cuerpo':experiencia.cuerpo,
             }
         )
-    
     return render(request, "editarExperiencia.html", {"formu": form, "titulo":experiencia.titulo, "id":experiencia.id})
         
 def eliminarExperiencia(request, id):
@@ -231,7 +248,7 @@ def eliminarExperiencia(request, id):
     experiencia.delete()
     experiencia = Experiencia.objects.all()
     contexto ={"experiencia":experiencia}
-    return render(request,"america_exp.html",contexto)
+    return render(request,"index.html",contexto)
 
 def leerExperiencia(request, id):
     experiencia=Experiencia.objects.get(id=id)
@@ -239,6 +256,26 @@ def leerExperiencia(request, id):
     print(experiencia)
     return render(request, "leerExperiencia.html", {"experiencia":experiencia, "id":experiencia.id, "avatares":avatares})
 
+#Contacto
+def contacto(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            content = form.cleaned_data['content']
+            html = render_to_string('envioFormularioContacto.html',{
+                'name': name,
+                'email':email,
+                'content':content
 
+            })
+
+            send_mail(f'{name} consulta desde el blog "ViajandoAndo" ', 'This is the message','noreply@viajandoando.com', ['jonnyvm@hotmail.com'],html_message=html)
+            return redirect('contacto')
+    else:
+        form = ContactForm()
+    
+    return render(request, 'contacto.html', {'form':form})
 
 

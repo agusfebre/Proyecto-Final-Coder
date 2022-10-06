@@ -2,25 +2,21 @@
 
 {% load static %}
 
-
-
-
 {% block content %}
 <section class="page-section" id="{% url 'login_user' %}">
     {% if request.user.is_authenticated %}
-    <h1>{{ mensaje }}</h1>
+    <h1>{{ mensaje }}</h1>  
     {% else %}
-<div class="conteiner col-md-4 offset-md-4 card card-body p-3 text-center">
-<h1>FORMULARIO DE INGRESO</h1>
-
-<form action="{% url 'login_user' %}"  method="POST"> {% csrf_token %}
-
-    {{ form.as_p }}
-    <button type="submit">INICIAR SESION</button>
-
-</form>
-</div>
-{% endif %}
+    <div class="conteiner col-md-4 offset-md-4 card card-body p-3 text-center">
+        <h1>FORMULARIO DE INGRESO</h1>
+        <form action="{% url 'login_user' %}"  method="POST"> {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">INICIAR SESION</button>
+        </form>
+    </div>
 </section>
+{% endif %}
+{% endblock %}
 
+{% block seleccionarViaje %}
 {% endblock %}
