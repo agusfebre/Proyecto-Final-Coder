@@ -48,6 +48,7 @@ class AvatarForm(forms.Form):
 class ExperienciaForm(ModelForm):
     class Meta:
         model = Experiencia
+        
         fields = [
             'autor',
             'titulo',  

@@ -184,6 +184,9 @@ def ultimasExperiencias(request):
 def acercade(request):
     return render(request, 'acercade.html', {"imagen":obtenerAvatar(request)})
 
+def mapablog(request):
+    return render(request, 'mapablog.html', {"imagen":obtenerAvatar(request)})
+
 def cargarexperiencia(request):
     if request.method == 'POST':
         form = ExperienciaForm(request.POST, request.FILES)

@@ -28,6 +28,7 @@ urlpatterns = [
     path ('eliminarExperiencia/<id>', eliminarExperiencia, name="eliminarExperiencia"),
     path ('leerExperiencia/<id>', leerExperiencia, name="leerExperiencia"),
     path ('contacto', contacto, name="contacto"),
+    path ('mapablog', mapablog, name="mapablog"),
     
 
 

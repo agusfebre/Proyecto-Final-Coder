@@ -54,7 +54,7 @@
             </nav>
             <!-- Header-->
             {% block centroDePagina %}
-            <header class="bg-dark py-5">
+            <header class="bg-dark py-1">
                 <div class="container px-5">
                     <div class="row gx-5 align-items-center justify-content-center">
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -149,15 +149,15 @@
                     <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
                         <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
                             <div class="mb-4 mb-xl-0">
-                                <div class="fs-3 fw-bold text-white">New products, delivered to you.</div>
-                                <div class="text-white-50">Sign up for our newsletter for the latest updates.</div>
+                                <div class="fs-3 fw-bold text-white">Registrate facil y rapido para contarnos tu experiencia.</div>
+                                <div class="text-white-50">En Viajandoando no paramos de conocer ciudades, Gracias a los usuarios que se toman un tiempo y publican en el blog.</div>
                             </div>
                             <div class="ms-xl-4">
                                 <div class="input-group mb-2">
-                                    <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
-                                    <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
+                                    
+                                    <a class="btn btn-outline-light" id="button-newsletter"href="{% url 'registrate' %}"  type="button">Registrate Gratis!</a>
                                 </div>
-                                <div class="small text-white-50">We care about privacy, and will never share your data.</div>
+                                <div class="small text-white-50">Nos preocupamos por la privacidad y nunca compartiremos sus datos.</div>
                             </div>
                         </div>
                     </aside>
@@ -172,9 +172,9 @@
                     <div class="col-auto">
                         <a class="link-light small" href="{% url 'acercade' %}">Nosotros</a>
                         <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Mapa del Blog</a>
+                        <a class="link-light small" href="{% url 'mapablog' %}">Mapa del Blog</a>
                         <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Contacto</a>
+                        <a class="link-light small" href="{% url 'contacto' %}">Contacto</a>
                     </div>
                 </div>
             </div>

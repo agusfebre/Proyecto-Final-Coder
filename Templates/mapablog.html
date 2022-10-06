@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block centroDePagina %}
+<header class="bg-dark py-1">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2">Mapa Del Blog</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">Lo sentimos! esta página no se encuentra disponible, intente mas tarde.</p>
+                    <!-- <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                        {% if request.user.is_authenticated %}
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'cargarexperiencia' %}">Contar Experiencia</a>
+                        {% endif %}
+                        
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"></div>
+        </div>
+    </div>
+</header>
+ <br>
+ <div class="conteiner col-md-4 offset-md-4 card card-body p-3 text-center">
+    <img class="img-fluid rounded-3 my-5" src="\static\appviajandoando\assets\Mantenimiento.png" alt="..." />
+
+ </div>
+
+{% endblock %}

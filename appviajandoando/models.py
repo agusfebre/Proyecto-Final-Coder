@@ -20,7 +20,7 @@ CATEGORIAS = (
 ) 
 
 class Experiencia(models.Model):
-    autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     titulo = models.CharField(max_length=100)
     subtitulo = models.CharField(max_length=1000)
     categoria = models.CharField(max_length=100, choices = CATEGORIAS)
