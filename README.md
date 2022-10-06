@@ -23,3 +23,7 @@ Creemos que la programación es un factor elemental en el futuro que se nos vien
 
 Se adjunta el Unit Test del proyecto
 [Unit Test viajandoando.xlsx](https://github.com/agusfebre/Proyecto-Final-Coder/files/9670274/Unit.Test.viajandoando.xlsx)
+
+Aqui encontrará el link con el video del proyecto
+
+https://www.youtube.com/watch?v=IW6BtCYHv0c
